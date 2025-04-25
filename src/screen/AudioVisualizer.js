@@ -360,6 +360,7 @@ export default function AudioVisualizer({ backendAudioUrl }) {
         style={{ width: "100vw", height: "100vh", position: "relative" }}
       />
       <div className="action">
+      {audioUrl}
         {!isRecording ? (
           <button onClick={startRecording} style={{ width: 65, height: 65, background: 'none', border: 'none', }}>
             <FontAwesomeIcon icon={faMicrophone} size="xl" color="#2b3356" />
