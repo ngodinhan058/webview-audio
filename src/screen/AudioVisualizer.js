@@ -118,7 +118,8 @@ export default function AudioVisualizer({ backendAudioUrl }) {
 
         // const result = await uploadAudio(url, id, token);
         const result = await uploadAudio(blobUrl, id, token);
-        setAudioUrl(`${url}/${result?.audio_url}`);
+        // setAudioUrl(`${url}/${result?.audio_url}`);
+        setAudioUrl(backendAudioUrl); 
 
         setTimeout(() => toggleAudio(), 500);
         // const result = await uploadAudio(blobUrl, 3, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNzU2Mzc0NjczfQ.i-9E66nb-yTUMBGZ_T1lG_qWbwZvC2jpZ1vlZ6XjMi8");
