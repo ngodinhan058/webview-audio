@@ -38,7 +38,7 @@ export default function AudioVisualizer({ backendAudioUrl }) {
           setUrl(data.url);
         }
       } catch (err) {
-        console.warn("❌ Không parse được message:", err);
+        // console.warn("❌ Không parse được message:", err);
       }
     };
   
@@ -76,7 +76,7 @@ export default function AudioVisualizer({ backendAudioUrl }) {
       const filename = `recording_${Date.now()}.webm`;
       formData.append('file', blob, filename);
 
-      const res = await axios.post(`http://192.168.1.195:5000/questions_voices/${chatId}`, formData, {
+      const res = await axios.post(`${url}/questions_voices/${chatId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': token,
@@ -109,20 +109,23 @@ export default function AudioVisualizer({ backendAudioUrl }) {
 
       recorder.onstop = async () => {
         const blob = new Blob(recordedChunks.current, { type: "audio/webm" });
-        const url = URL.createObjectURL(blob);
+        const blobUrl = URL.createObjectURL(blob);
         // Set để chạy visualizer và play
         // nhớ delay để audioRef update
         // setAudioUrl(url); 
         // setTimeout(() => toggleAudio(), 500);
         // Gọi upload tại đây
-        const token = token; // thay bằng token thực
-        const chatId = id; // thay bằng chat id thực tế
+        
 
-        const result = await uploadAudio(url, chatId, token);
-        setAudioUrl(url + result?.audio_url);
+        // const result = await uploadAudio(url, id, token);
+        const result = await uploadAudio(blobUrl, id, token);
+        setAudioUrl(`${url}/${result?.audio_url}`);
+        
         setTimeout(() => toggleAudio(), 500);
+        // const result = await uploadAudio(blobUrl, 3, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNzU2Mzc0NjczfQ.i-9E66nb-yTUMBGZ_T1lG_qWbwZvC2jpZ1vlZ6XjMi8");
+        // setAudioUrl(`${url}/${result?.audio_url}`);
 
-        // console.log('Kết quả chuyển văn bản:', result?.content);
+        // console.log('Kết quả chuyển văn bản:', result?.text);
         // console.log('Kết quả chuyển văn bản:', `http://192.168.1.195:5000/${result?.audio_url}`);
       };
       mediaRecorderRef.current = recorder;
