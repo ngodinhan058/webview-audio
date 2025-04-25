@@ -32,25 +32,24 @@ export default function AudioVisualizer({ backendAudioUrl }) {
       try {
         const data = JSON.parse(event.data);
         console.log("📦 Dữ liệu nhận từ Expo:", data);
-        if (data.token && data.id && data.url) {
-          setToken(data.token);
-          setId(data.id);
-          setUrl(data.url);
-        }
+        setToken(data.token);
+        setId(data.id);
+        setUrl(data.url);
+
       } catch (err) {
         // console.warn("❌ Không parse được message:", err);
       }
     };
-  
+
     window.addEventListener("message", handleMessage);    // iOS
     document.addEventListener("message", handleMessage);  // Android
-  
+
     return () => {
       window.removeEventListener("message", handleMessage);
       document.removeEventListener("message", handleMessage);
     };
   }, []);
-  
+
 
   useEffect(() => {
     const unlockAudio = () => {
@@ -115,12 +114,12 @@ export default function AudioVisualizer({ backendAudioUrl }) {
         // setAudioUrl(url); 
         // setTimeout(() => toggleAudio(), 500);
         // Gọi upload tại đây
-        
+
 
         // const result = await uploadAudio(url, id, token);
         const result = await uploadAudio(blobUrl, id, token);
         setAudioUrl(`${url}/${result?.audio_url}`);
-        
+
         setTimeout(() => toggleAudio(), 500);
         // const result = await uploadAudio(blobUrl, 3, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNzU2Mzc0NjczfQ.i-9E66nb-yTUMBGZ_T1lG_qWbwZvC2jpZ1vlZ6XjMi8");
         // setAudioUrl(`${url}/${result?.audio_url}`);
@@ -360,6 +359,7 @@ export default function AudioVisualizer({ backendAudioUrl }) {
         style={{ width: "100vw", height: "100vh", position: "relative" }}
       />
       <div className="action">
+        {url}
         {!isRecording ? (
           <button onClick={startRecording} style={{ width: 65, height: 65, background: 'none', border: 'none', }}>
             <FontAwesomeIcon icon={faMicrophone} size="xl" color="#2b3356" />
