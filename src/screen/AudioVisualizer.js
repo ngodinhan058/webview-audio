@@ -79,6 +79,7 @@ export default function AudioVisualizer({ backendAudioUrl }) {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': token,
+          'ngrok-skip-browser-warning': 'true'
         },
       });
 
