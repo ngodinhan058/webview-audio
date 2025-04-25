@@ -124,8 +124,9 @@ export default function AudioVisualizer({ backendAudioUrl }) {
         // const result = await uploadAudio(blobUrl, 3, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNzU2Mzc0NjczfQ.i-9E66nb-yTUMBGZ_T1lG_qWbwZvC2jpZ1vlZ6XjMi8");
         // setAudioUrl(`${url}/${result?.audio_url}`);
 
-        // console.log('Kết quả chuyển văn bản:', result?.text);
-        // console.log('Kết quả chuyển văn bản:', `http://192.168.1.195:5000/${result?.audio_url}`);
+        console.log('Kết quả chuyển văn bản:', result?.text);
+        console.log('Kết quả voice:', `${url}/${result?.audio_url}`);
+        console.log('Kết quả token, id:', `${token}/${id}`);
       };
       mediaRecorderRef.current = recorder;
       recorder.start();
