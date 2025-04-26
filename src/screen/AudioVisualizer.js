@@ -23,32 +23,32 @@ export default function AudioVisualizer({ backendAudioUrl }) {
   const rendererRef = useRef(null);
   const streamRef = useRef(null);
 
-  const [token, setToken] = useState("");
-  const [id, setId] = useState("");
-  const [url, setUrl] = useState("");
+  const [token, setToken] = useState("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNzU2Mzc0NjczfQ.i-9E66nb-yTUMBGZ_T1lG_qWbwZvC2jpZ1vlZ6XjMi8");
+  const [id, setId] = useState(4);
+  const [url, setUrl] = useState("https://0e88-2405-4802-8151-df90-b175-dfe0-7fca-8ae6.ngrok-free.app");
 
-  useEffect(() => {
-    const handleMessage = (event) => {
-      try {
-        const data = JSON.parse(event.data);
-        console.log("📦 Dữ liệu nhận từ Expo:", data);
-        setToken(data.token);
-        setId(data.id);
-        setUrl(data.url);
+  // useEffect(() => {
+  //   const handleMessage = (event) => {
+  //     try {
+  //       const data = JSON.parse(event.data);
+  //       console.log("📦 Dữ liệu nhận từ Expo:", data);
+  //       setToken(data.token);
+  //       setId(data.id);
+  //       setUrl(data.url);
 
-      } catch (err) {
-        // console.warn("❌ Không parse được message:", err);
-      }
-    };
+  //     } catch (err) {
+  //       // console.warn("❌ Không parse được message:", err);
+  //     }
+  //   };
 
-    window.addEventListener("message", handleMessage);    // iOS
-    document.addEventListener("message", handleMessage);  // Android
+  //   window.addEventListener("message", handleMessage);    // iOS
+  //   document.addEventListener("message", handleMessage);  // Android
 
-    return () => {
-      window.removeEventListener("message", handleMessage);
-      document.removeEventListener("message", handleMessage);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("message", handleMessage);
+  //     document.removeEventListener("message", handleMessage);
+  //   };
+  // }, []);
 
 
   useEffect(() => {
@@ -117,7 +117,7 @@ export default function AudioVisualizer({ backendAudioUrl }) {
         // Gọi upload tại đây
 
 
-        // const result = await uploadAudio(url, id, token);
+        // const result = await uploadAudio(blobUrl, id, token);
         const result = await uploadAudio(blobUrl, id, token);
         setAudioUrl(`${url}/${result?.audio_url}`);
         // setAudioUrl(backendAudioUrl); 
